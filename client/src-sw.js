@@ -28,35 +28,15 @@ registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
 // TODO: Implement asset caching
 registerRoute(
-  ({ request }) => request.destination === 'image',
+  ({ request}) => ['style', 'script', 'worker'].includes(request.destination),
   new CacheFirst({
-    cacheName: 'image-cache',
+    cacheName: 'pwa-app-cache',
     plugins: [
       new CacheableResponsePlugin({
         statuses: [0, 200],
       }),
       new ExpirationPlugin({
         maxAgeSeconds: 30 * 24 * 60 * 60,
-      }),
-    ],
-  }),
-);
-
-registerRoute(
-  ({ request }) => {
-    console.log(request);
-    return (
-      // CSS
-      request.destination === 'style' ||
-      // JavaScript
-      request.destination === 'script'
-    );
-  },
-  new StaleWhileRevalidate({
-    cacheName: 'static-resources',
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
       }),
     ],
   })
