@@ -22,6 +22,8 @@ To set up the PWA Text Editor locally, follow these steps:
 
 ![Preview](./assets/images/Screenshot.png)
 
+[Deployed App](https://jatetext-76e3b19a25f7.herokuapp.com/).
+
 
 ## Features
 
